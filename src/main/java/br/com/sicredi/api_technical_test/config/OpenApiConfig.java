@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
                 title = "Biblioteca API",
                 version = "1.0",
                 description = "Microsserviço de gerenciamento de Biblioteca de Livros",
-                contact = @Contact(name = "Leandro", email = "leandro.ferreira777@gmail.com")
+                contact = @Contact(name = "Leandro Ferreira", email = "leandro.ferreira777@gmail.com")
         )
 )
 @SecurityScheme(
