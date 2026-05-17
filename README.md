@@ -44,7 +44,7 @@ A API permite o cadastro, consulta, atualização e remoção de livros com:
 | Spring Data Redis      | via Boot    | Abstração de cache                              |
 | Spring Security 6      | via Boot    | Autenticação e autorização                      |
 | Spring Cache           | via Boot    | Abstração de cache declarativo (`@Cacheable`)   |
-| JJWT                   | 0.12.6      | Geração e validação de tokens JWT (HS256)       |
+| JWT                    | 0.12.6      | Geração e validação de tokens JWT (HS256)       |
 | SpringDoc OpenAPI      | 2.8.8       | Documentação Swagger UI automática              |
 | ModelMapper            | 3.2.3       | Mapeamento entre entidades e DTOs               |
 | Lombok                 | via Boot    | Redução de boilerplate                          |
