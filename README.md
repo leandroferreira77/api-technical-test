@@ -276,7 +276,7 @@ Todos os erros retornam o mesmo padrão:
 
 | Código HTTP | Código de negócio     | Situação                                |
 |-------------|----------------------|-----------------------------------------|
-| 400         | `VALIDACAO_INVALIDA` | Campos obrigatórios ausentes ou inválidos|
+| 400         | `REGRA_NEGOCIO_INVALIDA` | Campos obrigatórios ausentes ou inválidos|
 | 400         | `ANO_PUBLICACAO_INVALIDO` | Ano maior que o corrente           |
 | 401         | `CREDENCIAIS_INVALIDAS` | Email ou senha incorretos            |
 | 404         | `LIVRO_NAO_ENCONTRADO` | Livro inexistente no banco            |
