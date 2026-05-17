@@ -363,7 +363,7 @@ Cenários cobertos:
 Sobem **MongoDB e Redis reais via Testcontainers** e testam o fluxo completo HTTP → Service → Banco, incluindo autenticação JWT:
 
 ```bash
-./mvnw test -Dtest="LivroControllerIT"
+./mvnw test -Dtest="LivroControllerTest"
 ```
 
 Cenários cobertos:
@@ -428,12 +428,12 @@ src/
 └── test/
     └── java/br/com/sicredi/api_technical_test/
         ├── ApiTechnicalTestApplicationTests.java   # Context load test
-        ├── TestcontainersConfiguration.java        # Config MongoDB para dev local
-        ├── TestApiTechnicalTestApplication.java    # Bootstrap dev com containers
         ├── controller/
-        │   └── LivroControllerIT.java              # Testes de integração
+        |    └── LivroControllerTest.java            # Testes de integração
+        |    └── AuthControllerTest.java             # Testes unitários
         └── service/
             └── LivroServiceTest.java               # Testes unitários
+            └── AuthServiceTest.java                # Testes unitários
 ```
 
 ---
@@ -455,22 +455,3 @@ Todas as configurações ficam em `src/main/resources/application.properties`:
 | `logging.level.br.com.sicredi`       | `DEBUG`                               | Nível de log da aplicação        |
 
 > **Importante:** em ambientes de produção, o `jwt.secret` deve ser injetado via variável de ambiente ou secret manager (ex: AWS Secrets Manager, Vault), **nunca** versionado em repositório.
-
----
-
-## Decisões Técnicas Relevantes
-
-**Por que MongoDB?**  
-Flexibilidade de schema para o domínio de livros, cujos atributos podem evoluir sem migrations custosas. O MongoDB também oferece indexação nativa em campos como `isbn` e `email`, garantindo unicidade com performance.
-
-**Por que Redis como cache e não cache em memória local?**  
-Em uma arquitetura de microsserviços com múltiplas instâncias, caches locais (como Caffeine) geram inconsistência entre pods. O Redis centraliza o estado do cache e é compartilhado entre todas as réplicas.
-
-**Por que JWT stateless?**  
-Elimina a necessidade de armazenar sessões no servidor, favorecendo a escalabilidade horizontal. Qualquer instância da API valida o token de forma autônoma, sem consulta a banco ou cache de sessão.
-
-**Por que `record` para DTOs?**  
-Records Java 21 são imutáveis por padrão, eliminam getters/setters/equals/hashCode e comunicam claramente que aquele objeto é um portador de dados sem comportamento. Ideal para a camada de transporte.
-
-**Por que Testcontainers em vez de mocks de infraestrutura?**  
-Mocks de repositório podem mascarar incompatibilidades entre a query derivada do Spring Data e a versão real do banco. Testcontainers garante que os testes de integração rodam contra a mesma versão de MongoDB e Redis usada em produção.
